@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
     
     // Current savings reaching 950 by April and staying constant
-    const actualSavings = [350, 650, 850, 950, 950, 950, 950, 950, 950, 950, 950, 950];
+    const actualSavings = [350, 650, 850, 950, null, null, null, null, null, null, null, null];
     
     // Projected savings when all projects complete - reaching 1800 by December
     const projectedSavings = [350, 650, 850, 950, 1000, 1100, 1200, 1300, 1400, 1500, 1650, 1800];
@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     borderColor: 'rgba(59, 130, 246, 1)',
                     tension: 0.4,
                     borderWidth: 2,
-                    fill: true
+                    fill: true,
+                    spanGaps: false
                 },
                 {
                     label: '预期工时节省',
@@ -50,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     intersect: false,
                     callbacks: {
                         label: function(context) {
+                            if (context.raw === null) return null;
                             return context.dataset.label + ': ' + context.raw + ' 工时/月';
                         }
                     }
